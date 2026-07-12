@@ -6,7 +6,9 @@
 # 手順１:こんてな起動
 cosmos3のgithub,quickstartから:Generator with vLLM-Omni
 
+```
 docker run --runtime nvidia --gpus all \
+  -e HF_TOKEN=<実際のトークンで置き換える> \
   -v ~/.cache/huggingface:/root/.cache/huggingface \
   -v "$(pwd):/workspace" \
   -p 8000:8000 \
@@ -16,5 +18,5 @@ docker run --runtime nvidia --gpus all \
   --omni \
   --model-class-name Cosmos3OmniDiffusersPipeline \
   --allowed-local-media-path / \
-  --port 8000 \
-  --init-timeout 1800
+  --port 8000
+```
