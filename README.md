@@ -4,6 +4,7 @@
 # 手順１:コンテナの起動と動画生成デモ
 cosmos3のgithub,quickstartから:Generator with vLLM-Omni
 
+## コンテナとvllmサーバーの起動
 ```
 # vllmサーバーの起動
 docker run --runtime nvidia --gpus all \
@@ -19,6 +20,8 @@ docker run --runtime nvidia --gpus all \
   --allowed-local-media-path / \
   --port 8000
 ```
+
+## text2videoのデモ
 ```
 # デモの実行
 time curl -sS -X POST http://localhost:8000/v1/videos/sync \
@@ -31,4 +34,20 @@ time curl -sS -X POST http://localhost:8000/v1/videos/sync \
   --form-string "guidance_scale=4.0" \
   --form-string "seed=42" \
   -o smoke_t2v.mp4
+```
+
+## image2videoのデモ
+```
+time curl -sS -X POST http://localhost:8000/v1/videos/sync \
+  --form-string "prompt=The machine in the image continues its normal periodic operation. Static camera, consistent lighting." \
+  --form-string "negative_prompt=blurry, distorted, low quality" \
+  --form-string "size=832x480" \
+  --form-string "num_frames=81" \
+  --form-string "fps=24" \
+  --form-string "num_inference_steps=35" \
+  --form-string "guidance_scale=4.0" \
+  --form-string "seed=42" \
+  -w "\nHTTP %{http_code}\n" \
+  -F "input_reference=@/home/nvidia/NVIDIA_SAMP/cosmos3/workspace/IPAD_dataset/R02/training/frames/02/025.jpg" \
+  -o outputs/i2v_R02_train_s42.mp4
 ```
