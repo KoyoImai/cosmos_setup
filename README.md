@@ -51,3 +51,9 @@ time curl -sS -X POST http://localhost:8000/v1/videos/sync \
   -F "input_reference=@/home/nvidia/NVIDIA_SAMP/cosmos3/workspace/IPAD_dataset/R02/training/frames/02/025.jpg" \
   -o outputs/i2v_R02_train_s42.mp4
 ```
+
+##
+
+```
+docker exec -it vad-work bash
+```
