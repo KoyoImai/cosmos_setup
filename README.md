@@ -59,7 +59,7 @@ docker exec -it vad-work bash
 ```
 
 
-# VideoMAEの用意
+# VideoMAE関連の用意
 ## NGCへログイン
 ```
 docker login nvcr.io
