@@ -81,7 +81,16 @@ docker run -it \
   --name videomae \
   --gpus all \
   --ipc=host \
-  -v "./cosmos3-videomae/:/workspace/videomae" \
+  -v "$HOME/research/nvidia_2026summer:/workspace/videomae" \
   -w /workspace/videomae \
-  nvcr.io/nvidia/pytorch:26.06-py3
+  nvcr.io/nvidia/pytorch:25.10-py3
+```
+
+
+## 最低限のパッケージを導入
+```
+python -m pip install \
+  "transformers==4.56.2" \
+  accelerate \
+  av
 ```
