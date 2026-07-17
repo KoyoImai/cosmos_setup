@@ -57,3 +57,31 @@ time curl -sS -X POST http://localhost:8000/v1/videos/sync \
 ```
 docker exec -it vad-work bash
 ```
+
+
+# VideoMAEの用意
+## NGCへログイン
+```
+docker login nvcr.io
+```
+```
+Username: $oauthtoken
+Password: <NGC Personal API Key>
+```
+
+## imageの取得とコンテナの作成
+```
+docker pull nvcr.io/nvidia/pytorch:26.06-py3
+```
+```
+mkdir -p ./cosmos3-videomae/{src,data,outputs,cache}
+```
+```
+docker run -it \
+  --name videomae \
+  --gpus all \
+  --ipc=host \
+  -v "./cosmos3-videomae/:/workspace/videomae" \
+  -w /workspace/videomae \
+  nvcr.io/nvidia/pytorch:26.06-py3
+```
