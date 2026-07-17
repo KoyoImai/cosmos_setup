@@ -94,3 +94,79 @@ python -m pip install \
   accelerate \
   av
 ```
+
+# VideoMAEの用意2
+## ディレクトリ構造
+```
+nvidia_2026summer/
+├── configs/       実験設定
+├── data/
+│   ├── raw/       展開前・未加工dataset
+│   ├── ucf101/    UCF101本体
+│   ├── splits/    train/validation/testの一覧
+│   └── metadata/  動画情報・集計結果
+├── environment/   環境情報
+├── logs/          学習log
+├── outputs/
+│   ├── checkpoints/
+│   ├── metrics/
+│   ├── predictions/
+│   └── figures/
+├── scripts/       実行script
+├── src/
+│   ├── datasets/
+│   ├── models/
+│   ├── training/
+│   └── utils/
+└── tests/         小規模動作確認
+```
+```
+cd ~/research/nvidia_2026summer
+
+mkdir -p \
+  configs \
+  data/raw \
+  data/ucf101 \
+  data/splits \
+  data/metadata \
+  logs \
+  outputs/checkpoints \
+  outputs/metrics \
+  outputs/predictions \
+  outputs/figures \
+  scripts \
+  src/datasets \
+  src/models \
+  src/training \
+  src/utils \
+  tests
+```
+
+## データセット（UCF101）
+```
+curl -fL \
+  --retry 5 \
+  --retry-all-errors \
+  --retry-delay 5 \
+  -C - \
+  -o UCF-101.zip \
+  "https://huggingface.co/datasets/quchenyuan/UCF101-ZIP/resolve/main/UCF-101.zip?download=true"
+```
+```
+curl -fL \
+  --retry 5 \
+  --retry-all-errors \
+  --retry-delay 5 \
+  -C - \
+  -o UCF101TrainTestSplits-RecognitionTask.zip \
+  "https://huggingface.co/datasets/quchenyuan/UCF101-ZIP/resolve/main/UCF101TrainTestSplits-RecognitionTask.zip?download=true"
+```
+```
+cd ~/research/nvidia_2026summer
+
+unzip data/raw/UCF-101.zip -d data/ucf101/
+
+unzip \
+  data/raw/UCF101TrainTestSplits-RecognitionTask.zip \
+  -d data/splits/
+```
