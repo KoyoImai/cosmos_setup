@@ -170,3 +170,16 @@ unzip \
   data/raw/UCF101TrainTestSplits-RecognitionTask.zip \
   -d data/splits/
 ```
+
+
+## コンテナ入る
+```
+docker exec -it \
+  --user "$(id -u):$(id -g)" \
+  --env HOME=/workspace/videomae/.home \
+  --env HF_HOME=/workspace/videomae/.cache/huggingface \
+  --env PYTHONPATH=/workspace/videomae \
+  -w /workspace/videomae \
+  videomae \
+  bash
+```
